@@ -6,17 +6,8 @@ var bt = require('../../node_modules/bing-translate/lib/bing-translate.js').init
   client_secret: keys.client_secret
 });
 var randomWords = require('random-words');
-<<<<<<< HEAD
 var mongoose = require('mongoose');
 var TranslateSchema = mongoose.model('TranslateSchema');
-=======
-
-var wordGroup = randomWords(20);
-wordGrouplength = wordGroup.length;
-for (i=0; i<wordGrouplength; i++) {
-  console.log(wordGroup[i]);
-}
->>>>>>> 62cc313338b350f5a06114627972ce455e7553c9
 
 router.get('/', function(req, res, next) {
   res.render('index');
