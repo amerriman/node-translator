@@ -7,8 +7,23 @@
 
   <div class="container">
 
-    <h1>{{ title }}</h1>
-    <p>Welcome to {{ title }}</p>
+    <h1>Thesaurus Rex</h1>
+    <form>
+      <div class="form-group">
+        <label for="fromLanguage">Translate from:</label>
+        <input type="text" class="form-control" id="fromLanguage" placeholder="English">
+      </div>
+      <div class="form-group">
+        <label for="toLanguage">Translate to:</label>
+        <input type="text" class="form-control" id="toLanguage" placeholder="Spanish">
+      </div>
+      <div class="form-group">
+        <label for="translateWord">Word to Translate:</label>
+        <input type="text" class="form-control" id="translateWord" placeholder="Hello">
+      </div>
+      <button type="submit" class="btn btn-default">Translate</button>
+    </form>
+
 
   </div>
 
