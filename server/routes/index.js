@@ -5,22 +5,21 @@ var bt = require('../../node_modules/bing-translate/lib/bing-translate.js').init
   client_id: keys.client_id,
   client_secret: keys.client_secret
 });
+var randomWords = require('random-words');
+
 
 router.get('/', function(req, res, next) {
   res.render('index');
-  // bt.translate('This hotel is located close to the centre of Paris.', 'en', 'ro', function(err, res){
-  //   // console.log(err, res);
-  // });
+  console.log(randomWords(20));
 });
 
 router.post('/', function(req, res, next){
   var fromLanguage = req.body.fromLanguage;
   var toLanguage = req.body.toLanguage;
   var translateWord = req.body.translateWord;
-  bt.translate(translateWord, fromLanguage, toLanguage, function(err, res){
-    console.log(err, res);
-  })
-  res.end();
+  bt.translate(translateWord, fromLanguage, toLanguage, function(err, response){
+    res.send(response);
+  });
 });
 
 module.exports = router;

@@ -15,6 +15,7 @@ $(document).on('ready', function() {
     })
     .done(function(data){
       console.log(data);
+      $('#results').text(data.translated_text);
     })
     .fail(function(err){
       console.log(err);
