@@ -7,10 +7,14 @@ var bt = require('../../node_modules/bing-translate/lib/bing-translate.js').init
 });
 var randomWords = require('random-words');
 
+var wordGroup = randomWords(20);
+wordGrouplength = wordGroup.length;
+for (i=0; i<wordGrouplength; i++) {
+  console.log(wordGroup[i]);
+}
 
 router.get('/', function(req, res, next) {
   res.render('index');
-  console.log(randomWords(20));
 });
 
 router.post('/', function(req, res, next){
