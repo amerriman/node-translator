@@ -107,18 +107,30 @@
             <option value ="yua">Yucatec Maya</option>
         </select>
       </div>
-      <div class="form-group">
+      <div class="form-group" id="translated-word">
         <label for="translateWord">Word to Translate:</label>
         <input type="text" class="form-control" id="translateWord" placeholder="Hello" name='translateWord'>
       </div>
-      <button type="submit" class="btn btn-default">Translate</button>
+      <button type="submit" id="translate" class="btn btn-default">Translate</button>
     </form>
+    <div id="results"></div>
+    <button type="button" class="translator">Back to Translator</button>
+    <button type="button" class="start-quiz">Start Quiz</button>
     <br><br><br><br>
-    <div id='results'></div>
 
-    <div class='animated fadeIn'>LETS SEE IF THIS FLASHES IN OR NOT!</div>
+    <div class="stage">
+      <div class="flashcard">
+        <div class="front">
+    <span id='front'>TEST FRONT</span>
+        </div>
+        <div class="back">
+          <span id='back'>TEST BACK</span>
+        </div>
+      </div>
+    </div>
 
-    <form>
+
+    <form id="answer-form">
       <label for='answer'>Answer</label>
       <input type='text' class='form-control' id='answer' placeholder='Insert Answer Here' name='answer'>
       <button type='submit' class='btn btn-default'>Check Answer</button>
