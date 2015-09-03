@@ -2,18 +2,23 @@
 
 
 $(document).on('ready', function() {
-  // $.ajax({
-  //   method: 'post',
-  //   url: 'http://api.microsofttranslator.com&client_id=TRexg1128?client_secret=SZCUOEd0phCVkILVyY5ViZsBTzUpctF6GLvPgNpfON4=?grant_type=client_credentials',
-  //   type: 'jsonp'
-  // })
-  // .done(function(data){
-  //   console.log(data);
-  // })
-  // .fail(function(err){
-  //   console.log(err);
-  // });
-
-
-  
+  $('form').on('submit', function(e){
+    e.preventDefault();
+    $.ajax({
+      method: 'post',
+      url: '/',
+      data: {
+        fromLanguage: $('#fromLanguage').val(),
+        toLanguage: $('#toLanguage').val(),
+        translateWord: $('#translateWord').val()
+      }
+    })
+    .done(function(data){
+      console.log(data);
+    })
+    .fail(function(err){
+      console.log(err);
+    });
+    $(':input').val('');
+  });
 });
