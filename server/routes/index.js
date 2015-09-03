@@ -13,36 +13,55 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.post('/', function(req, res, next){
+router.post('/translate', function(req, res, next){
   var fromLanguage = req.body.fromLanguage;
   var toLanguage = req.body.toLanguage;
   var translateWord = req.body.translateWord;
-
-  var newEntry = new TranslateSchema({
-    user: 'Keith',
-    currentChallenge: [],
-    language: 'Spanish',
-    stats:[
-      {
-        word: 'hello',
-        timesSeen: 45,
-        timesCorrect: 4,
-        timesIncorrect: 41
-      }
-    ]
-  });
-
-  router.put()
-
-
-  newEntry.save(function(err){
-    if(err) throw err;
-    console.log('success');
-  });
+  console.log(req.body, "rqbody");
 
   bt.translate(translateWord, fromLanguage, toLanguage, function(err, response){
     res.send(response);
+
   });
 });
+
+router.get('/quiz', function(req, res, next){
+  var words = randomWords(20);
+  console.log(words);
+  res.send(words);
+});
+
+
+// router.post('/', function(req, res, next){
+//   // var fromLanguage = req.body.fromLanguage;
+//   // var toLanguage = req.body.toLanguage;
+//   // var translateWord = req.body.translateWord;
+
+//   // bt.translate(translateWord, fromLanguage, toLanguage, function(err, response){
+//   //   res.send(response);
+//   // });
+// });
+
+  // var newEntry = new TranslateSchema({
+  //   user: 'Keith',
+  //   currentChallenge: [],
+  //   language: 'Spanish',
+  //   stats:[
+  //     {
+  //       word: 'hello',
+  //       timesSeen: 45,
+  //       timesCorrect: 4,
+  //       timesIncorrect: 41
+  //     }
+  //   ]
+  // });
+
+
+
+  // newEntry.save(function(err){
+  //   if(err) throw err;
+  //   console.log('success');
+  // });
+
 
 module.exports = router;

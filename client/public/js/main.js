@@ -6,7 +6,7 @@ $(document).on('ready', function() {
     e.preventDefault();
     $.ajax({
       method: 'post',
-      url: '/',
+      url: '/translate',
       data: {
         fromLanguage: $('#fromLanguage').val(),
         toLanguage: $('#toLanguage').val(),
