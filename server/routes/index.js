@@ -27,29 +27,6 @@ router.post('/translate', function(req, res, next){
   });
 });
 
-
-
-
-//post ALL flashcards
-router.post('/flashcards', function(req, res) {
-  // findOne by name
-  var query = {"name": req.body.name};
-
-  var options = {upsert: true, new: true};
-
-  var update = {$push: {"cards":{"question": req.body.question, "answer":req.body.answer}}};
-  SetOfCards.findOneAndUpdate(query, update, options, function(err, flashcard){
-    if (err){
-      console.log("Something went wrong");
-    }
-    else {
-      console.log("New Set Created!");
-      // res.json()
-    }
-  });
-});
-
-
 router.post('/quiz', function(req, res){
   var words = randomWords(20);
   var query = {"user": "User"};
@@ -81,12 +58,10 @@ router.post('/quiz', function(req, res){
   //   console.log('success');
   // });
 
-
-
-router.put('/', function(req, res){
+router.post('/answer', function(req, res){
 var currentWord = req.body.word;
 var correct = req.body.correct;
-
+console.log('correct');
   TranslateSchema.findOne({user: "User"}, function(err, entry){
     console.log(entry);
     var found = false;
@@ -119,6 +94,7 @@ var correct = req.body.correct;
       }
     }
   });
+  res.end();
 });
 
 
