@@ -1,4 +1,6 @@
 // add scripts
+var currentList;
+var currentWord;
 
 $('.start-quiz').on('click', function() {
   $('#translated-word').hide();
@@ -7,7 +9,6 @@ $('.start-quiz').on('click', function() {
   $('#results').hide();
   $('#translate').hide();
   $('.translator').show();
-
 });
 
 $('.translator').on('click', function() {
@@ -17,7 +18,6 @@ $('.translator').on('click', function() {
   $('#results').show();
   $('#translate').show();
   $('.translator').hide();
-
 });
 
 $(document).on('ready', function() {
@@ -28,7 +28,6 @@ $(document).on('ready', function() {
     $('.flashcard').toggleClass('flipped');
   });
 
-
   $('.start-quiz').on('click', function() {
     $.ajax({
       method: 'post',
@@ -38,7 +37,34 @@ $(document).on('ready', function() {
       }
     })
     .done(function(data){
-      console.log(data);
+      currentList = data;
+    });
+  });
+
+  $('#quiz-answer').on('click', function() {
+    currentWord = currentList[0];
+    var result = function() {
+      var numWrong = 0;
+      var splitWord = currentWord.split('') ;
+      var splitAnswer = $('#answer').split('');
+      for (i=0; i<splitWord.length; i++) {
+        if (splitWord[i] !== splitAnswer[i])
+        numWrong++;
+        console.log(numWrong);
+      }
+      if (numWrong > 1)
+      return false;
+      else
+      return true;
+    };
+
+    $.ajax({
+      method: 'put',
+      url: '/',
+      data: {
+        word: currentWord,
+        correct: true
+      }
     });
   });
 
@@ -54,7 +80,6 @@ $(document).on('ready', function() {
       }
     })
     .done(function(data){
-      console.log(data);
       $('#results').text(data.translated_text);
     })
     .fail(function(err){
