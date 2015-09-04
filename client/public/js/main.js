@@ -31,14 +31,18 @@ $(document).on('ready', function() {
 
   $('.start-quiz').on('click', function() {
     $.ajax({
-      method: 'get',
+      method: 'post',
       url: '/quiz',
+      data: {
+        language: $('#toLanguage').val()
+      }
     })
     .done(function(data){
       console.log(data);
     });
   });
 
+  $('.')
   $('form').on('submit', function(e){
     e.preventDefault();
     $.ajax({
