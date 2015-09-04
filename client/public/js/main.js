@@ -41,29 +41,31 @@ $(document).on('ready', function() {
     });
   });
 
-  $('#quiz-answer').on('click', function() {
+  var result = function() {
     currentWord = currentList[0];
-    var result = function() {
-      var numWrong = 0;
-      var splitWord = currentWord.split('') ;
-      var splitAnswer = $('#answer').split('');
-      for (i=0; i<splitWord.length; i++) {
-        if (splitWord[i] !== splitAnswer[i])
-        numWrong++;
-        console.log(numWrong);
-      }
-      if (numWrong > 1)
-      return false;
-      else
-      return true;
-    };
+    var numWrong = 0;
+    var splitWord = currentWord.split('') ;
+    var splitAnswer = $('#answer').val().split('');
+    for (i=0; i<splitWord.length; i++) {
+      if (splitWord[i] !== splitAnswer[i])
+      numWrong++;
+      console.log(numWrong);
+    }
+    if (numWrong > 1)
+    return false;
+    else
+    return true;
+  };
 
+  $('#quiz-answer').on('click', function() {
+    console.log('test');
+    var res = result();
     $.ajax({
-      method: 'put',
-      url: '/',
+      method: 'post',
+      url: '/answer',
       data: {
         word: currentWord,
-        correct: true
+        correct: res
       }
     });
   });
