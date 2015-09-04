@@ -1,6 +1,5 @@
 // add scripts
-var currentList;
-var currentWord;
+
 
 $('.start-quiz').on('click', function() {
   $('#translated-word').hide();
@@ -41,21 +40,6 @@ $(document).on('ready', function() {
     });
   });
 
-  var result = function() {
-    currentWord = currentList[0];
-    var numWrong = 0;
-    var splitWord = currentWord.split('') ;
-    var splitAnswer = $('#answer').val().split('');
-    for (i=0; i<splitWord.length; i++) {
-      if (splitWord[i] !== splitAnswer[i])
-      numWrong++;
-      console.log(numWrong);
-    }
-    if (numWrong > 1)
-    return false;
-    else
-    return true;
-  };
 
   $('#quiz-answer').on('click', function() {
     console.log('test');
@@ -67,25 +51,26 @@ $(document).on('ready', function() {
         word: currentWord,
         correct: res
       }
+    }).done(function() {
+      displayAnswer();
+      console.log('success');
     });
   });
 
+
   $('form').on('submit', function(e){
     e.preventDefault();
-    $.ajax({
-      method: 'post',
-      url: '/translate',
-      data: {
-        fromLanguage: $('#fromLanguage').val(),
-        toLanguage: $('#toLanguage').val(),
-        translateWord: $('#translateWord').val()
+
+    var translateData = {
+      fromLanguage: $('#fromLanguage').val(),
+      toLanguage: $('#toLanguage').val(),
+      translateWord: $('#translateWord').val()
+    };
+
+    transText(translateData, function(err, data){
+      if(!err) {
+        $('#results').text(data);
       }
-    })
-    .done(function(data){
-      $('#results').text(data.translated_text);
-    })
-    .fail(function(err){
-      console.log(err);
     });
   });
 });

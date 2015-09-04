@@ -18,3 +18,8 @@
     * display the correct answer if they were right
     * repeats same 20 words if you get 5 wrong before finishing
   1. make it look good
+
+
+
+
+still needs to display to DOM
