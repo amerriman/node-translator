@@ -25,36 +25,32 @@ router.post('/translate', function(req, res, next){
   });
 });
 
-router.get('/quiz', function(req, res, next){
+router.post('/quiz', function(req, res, next){
   var words = randomWords(20);
-  console.log(words);
+
+  var newEntry = new TranslateSchema({
+    user: 'User',
+    currentChallenge: words,
+    language: req.body.language,
+    stats:[
+      {
+        word: null,
+        timesSeen: 0,
+        timesCorrect: 0,
+        timesIncorrect: 0
+      }
+    ]
+  });
+
   res.send(words);
 });
 
+router.put('/', function(req, res){
 
-// router.post('/', function(req, res, next){
-//   // var fromLanguage = req.body.fromLanguage;
-//   // var toLanguage = req.body.toLanguage;
-//   // var translateWord = req.body.translateWord;
+});
 
-//   // bt.translate(translateWord, fromLanguage, toLanguage, function(err, response){
-//   //   res.send(response);
-//   // });
-// });
 
-  // var newEntry = new TranslateSchema({
-  //   user: 'Keith',
-  //   currentChallenge: [],
-  //   language: 'Spanish',
-  //   stats:[
-  //     {
-  //       word: 'hello',
-  //       timesSeen: 45,
-  //       timesCorrect: 4,
-  //       timesIncorrect: 41
-  //     }
-  //   ]
-  // });
+
 
 
 
