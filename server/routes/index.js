@@ -28,39 +28,44 @@ router.post('/translate', function(req, res, next){
 
 router.post('/quiz', function(req, res){
   var random = randomWords(20);
+  var counter = 0;
   var words = [];
   for(var i=0; i<random.length; i++){
     var currentWord = random[i];
-    var transWord;
+
     bt.translate(currentWord, req.body.fromLanguage, req.body.toLanguage, function(err, response){
-      transWord = response;
-    });
-    words.push({
-      nativeWord: currentWord,
-      foreignWord: transWord
+      if(err) throw err;
+      counter++;
+      words.push({
+        nativeWord: response.original_text.toLowerCase(),
+        foreignWord: response.translated_text.toLowerCase()
+      });
+      if (counter===19) {
+        var query = {"user": "User"};
+        var options = {upsert: true, new: true};
+        var update = {currentChallenge: words, language: req.body.toLanguage};
+
+        TranslateSchema.update(query, update, options, function(err){
+          if (err) throw err;
+        });
+        console.log(words);
+        res.send(words);
+      }
     });
   }
-  var query = {"user": "User"};
-  var options = {upsert: true, new: true};
-  var update = {currentChallenge: random, language: req.body.toLanguage};
-
-  TranslateSchema.update(query, update, options, function(err){
-    if (err) throw err;
-  });
-  res.send(words);
 });
 
 router.post('/answer', function(req, res){
   var currentWord = req.body.word;
-  var correct = req.body.correct;
-  console.log('REQ BODY',req.body);
+  var correct = JSON.parse(req.body.correct);
+  console.log(correct);
   TranslateSchema.findOne({user: "User"}, function(err, entry){
     var found = false;
     for (var i = 0; i < entry.stats.length; i++) {
       if(entry.stats[i].word === currentWord) {
         found = true;
         entry.stats[i].timesSeen++;
-        if(correct==='true'){
+        if(correct){
           console.log('FOUND AND CORRECT');
           entry.stats[i].timesCorrect++;
         } else {
@@ -70,7 +75,7 @@ router.post('/answer', function(req, res){
       }
     }
     if (!found){
-      if (correct==='true'){
+      if (correct){
         console.log('correct', correct);
         console.log('NOT FOUND AND CORRECT');
         entry.stats.push(  {
@@ -91,7 +96,7 @@ router.post('/answer', function(req, res){
     }
     TranslateSchema.update({user: "User"}, entry, {upsert: true, new: true}, function(err){
       if (err){
-        throw err
+        throw err;
       }
     });
   });
