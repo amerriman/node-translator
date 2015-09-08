@@ -19,7 +19,6 @@ router.post('/translate', function(req, res, next){
   var fromLanguage = req.body.fromLanguage;
   var toLanguage = req.body.toLanguage;
   var translateWord = req.body.translateWord;
-  console.log(req.body, "rqbody");
 
   bt.translate(translateWord, fromLanguage, toLanguage, function(err, response){
     res.send(response);
@@ -28,56 +27,52 @@ router.post('/translate', function(req, res, next){
 });
 
 router.post('/quiz', function(req, res){
-  var words = randomWords(20);
+  var random = randomWords(20);
+  var words = [];
+  for(var i=0; i<random.length; i++){
+    var currentWord = random[i];
+    var transWord;
+    bt.translate(currentWord, req.body.fromLanguage, req.body.toLanguage, function(err, response){
+      transWord = response;
+    });
+    words.push({
+      nativeWord: currentWord,
+      foreignWord: transWord
+    });
+  }
   var query = {"user": "User"};
   var options = {upsert: true, new: true};
-  var update = {currentChallenge: words, language: req.body.language};
+  var update = {currentChallenge: random, language: req.body.toLanguage};
 
   TranslateSchema.update(query, update, options, function(err){
     if (err) throw err;
-    console.log("success");
   });
   res.send(words);
 });
 
-  // var newEntry = new TranslateSchema({
-  //   user: 'User',
-  //   currentChallenge: words,
-  //   language: req.body.language,
-    // stats:[
-      // {
-      //   word: null,
-      //   timesSeen: 0,
-      //   timesCorrect: 0,
-      //   timesIncorrect: 0
-      // }
-    // ]
-  // });
-  // newEntry.save(function(err){
-  //   if(err) throw err;
-  //   console.log('success');
-  // });
-
 router.post('/answer', function(req, res){
-var currentWord = req.body.word;
-var correct = req.body.correct;
-console.log('correct');
+  var currentWord = req.body.word;
+  var correct = req.body.correct;
+  console.log('REQ BODY',req.body);
   TranslateSchema.findOne({user: "User"}, function(err, entry){
-    console.log(entry);
     var found = false;
     for (var i = 0; i < entry.stats.length; i++) {
       if(entry.stats[i].word === currentWord) {
         found = true;
         entry.stats[i].timesSeen++;
-        if(correct){
+        if(correct==='true'){
+          console.log('FOUND AND CORRECT');
           entry.stats[i].timesCorrect++;
         } else {
+          console.log('FOUND AND INCORRECT');
           entry.stats[i].timesIncorrect++;
         }
       }
     }
     if (!found){
-      if(correct){
+      if (correct==='true'){
+        console.log('correct', correct);
+        console.log('NOT FOUND AND CORRECT');
         entry.stats.push(  {
           word: currentWord,
           timesSeen: 1,
@@ -85,6 +80,7 @@ console.log('correct');
           timesIncorrect: 0
         });
       } else {
+        console.log('NOT FOUND AND INCORRECT');
         entry.stats.push({
           word: currentWord,
           timesSeen: 1,
@@ -93,10 +89,19 @@ console.log('correct');
         });
       }
     }
+    TranslateSchema.update({user: "User"}, entry, {upsert: true, new: true}, function(err){
+      if (err){
+        throw err
+      }
+    });
   });
   res.end();
 });
 
-
+router.get('/list', function(req, res){
+  TranslateSchema.findOne({user: "User"}, function(err, entry){
+    res.send(entry.currentChallenge);
+  });
+});
 
 module.exports = router;
