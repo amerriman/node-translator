@@ -3,27 +3,27 @@ $(document).on('ready', function() {
   $('.flashcard').hide();
   $('#answer-form').hide();
   $('.flashcard').on('click', function() {
-    $('.flashcard').toggleClass('flipped');
-  });
 
-  $('form').on('submit', function(e){
-    e.preventDefault();
-
-    var translateData = {
-      fromLanguage: $('#fromLanguage').val(),
-      toLanguage: $('#toLanguage').val(),
-      translateWord: $('#translateWord').val()
-    };
-
-    transText(translateData, function(err, data){
-      if(!err) {
-        $('#results').text(data);
-      }
-    });
   });
 });
 
 // add scripts
+$('form').on('submit', function(e){
+  e.preventDefault();
+
+  var translateData = {
+    fromLanguage: $('#fromLanguage').val(),
+    toLanguage: $('#toLanguage').val(),
+    translateWord: $('#translateWord').val()
+  };
+
+  transText(translateData, function(err, data){
+    if(!err) {
+      $('#results').text(data);
+    }
+  });
+});
+
 $('.start-quiz').on('click', function() {
   $('#translated-word').hide();
   $('.flashcard').show();
@@ -44,7 +44,7 @@ $('.start-quiz').on('click', function() {
   })
   .done(function(data){
     currentList = data;
-    nextWord();
+      startQuiz();
   });
 });
 
@@ -59,7 +59,6 @@ $('.translator').on('click', function() {
 });
 
 $('#quiz-answer').on('click', function() {
-  console.log('test');
   var res = result();
   $.ajax({
     method: 'post',
@@ -70,12 +69,12 @@ $('#quiz-answer').on('click', function() {
     }
   }).done(function() {
     displayAnswer();
-    console.log('success');
   });
   $('#quiz-answer').hide();
   $('#next-question').show();
 });
 
 $('#next-question').on('click', function() {
-  // nextquestion();
+  nextWord();
+  $('#answer').val('');
 });
