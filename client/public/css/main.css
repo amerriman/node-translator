@@ -11,6 +11,9 @@ a {
   -webkit-perspective: 1000;
 }
 
+#fromLanguage, #toLanguage {
+  color: black;
+}
 .flashcard {
   background-color:white;
   height: 300px;
