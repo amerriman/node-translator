@@ -28,13 +28,26 @@ a {
   -webkit-transform: rotateX(180deg);
 }
 
-.front, .back {
+.front {
   height: 300px;
   width: 500px;
   position: absolute;
   text-align: center;
   -webkit-backface-visibility: hidden;
+   color: #000;
+   top: 50%;
 }
+
+.back {
+  height: 300px;
+  width: 500px;
+  position: absolute;
+  text-align: center;
+  -webkit-backface-visibility: hidden;
+   color: #000;
+   top: -50%;
+
+ }
 
 .front p, .back p {
   margin-top: 25%;
