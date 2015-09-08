@@ -61,6 +61,7 @@
       <div class="form-group">
         <label for="toLanguage">Translate to:</label>
         <select id="toLanguage">
+            <option value ="es">Spanish</option>
             <option value ="ar">Arabic</option>
             <option value ="bg">Bulgarian</option>
             <option value ="ca">Catalan</option>
@@ -96,7 +97,6 @@
             <option value ="ru">Russian</option>
             <option value ="sk">Slovak</option>
             <option value ="sl">Slovenian</option>
-            <option value ="es">Spanish</option>
             <option value ="sv">Swedish</option>
             <option value ="th">Thai</option>
             <option value ="tr">Turkish</option>
@@ -114,8 +114,9 @@
       <button type="submit" id="translate" class="btn btn-default">Translate</button>
     </form>
     <div id="results"></div>
-    <button type="button" class="translator">Back to Translator</button>
-    <button type="button" class="start-quiz">Start Quiz</button>
+    <button type="button" class="btn btn-default translator">Back to Translator</button>
+    <br>
+    <button type="button" class="btn btn-default start-quiz">Start Quiz</button>
     <br><br><br><br>
 
     <div class="stage">
@@ -134,7 +135,7 @@
       <input type='text' class='form-control' id='answer' placeholder='Insert Answer Here' name='answer'>
       <button id="quiz-answer" class='btn btn-default'>Check Answer</button>
     </form>
-
+<button id="next-question" class='btn btn-default'>Next Question</button>
 
   </div>
 

@@ -18,6 +18,11 @@ function setFront(){
 
 function nextWord(){
   currentWord = currentList.pop();
+  $('.front').append(currentWord);
+  // var transWord = transText(currentWord, function() {
+  //
+  // })
+  // $('.back').append()
 }
 
 function transText(sendData, cb){
@@ -38,7 +43,7 @@ function transText(sendData, cb){
 var result = function() {
   var numWrong = 0;
   var ansWrong = 0;
-  var splitWord = cat.split('');
+  var splitWord = currentWord.split('');
   var splitAnswer = $('#answer').val().toLowerCase().split('');
 
   for (i=0; i<splitAnswer.length; i++) {
