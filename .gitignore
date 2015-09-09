@@ -3,4 +3,4 @@ node_modules/
 npm-debug.log
 keys.js
 *.env
-bower_components/
+/bower_components/
