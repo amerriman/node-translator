@@ -7,7 +7,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#"><strong><span id="heading">Translatorsauras Rex</span><strong></a>
+      <a class="navbar-brand" href="#"><strong><span id="heading">Translatorsaurus</span><strong></a><img id="dinosaur" src="img/dino.png"></img><div class="glyphicon glyphicon-volume-off"></div>
         <div id ="right">
       <ul class="nav navbar-nav">
         <li class="dropdown">
@@ -80,7 +80,7 @@
           </select>
       </div>
       <div class="form-group">
-        <label for="toLanguage">Translate to:</label>
+        <label for="toLanguage">Translate to:&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <select id="toLanguage">
             <option value ="es">Spanish</option>
             <option value ="ar">Arabic</option>
@@ -139,7 +139,6 @@
     <br>
     <button type="button" class="btn btn-default start-quiz">Start Quiz</button>
 
-    <div class="stage">
       <div class="flashcard">
         <div class="front">
           <p id='front'></p>
@@ -148,16 +147,14 @@
           <p id='back'></p>
         </div>
       </div>
-    </div>
+      <a name="quiz">
     <div id="quiz-results"></div>
-
+    <button id="next-question" class='btn btn-default'>Next Question</button>
     <form id="answer-form">
-      <label for='answer'>Answer</label>
       <input type='text' class='form-control' id='answer' placeholder='Insert Answer Here' name='answer'>
       <br>
       <button type="button" id="quiz-answer" class='btn btn-default'>Check Answer</button>
     </form>
-<button id="next-question" class='btn btn-default'>Next Question</button>
 
   </div>
 

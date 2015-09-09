@@ -1,20 +1,19 @@
-// var keys = require('./keys');
+var keys = require('./keys');
 var express = require('express');
 var router = express.Router();
 var bt = require('../../node_modules/bing-translate/lib/bing-translate.js').init({
-  client_id: ENV[client_id],
-  client_secret: ENV[client_secret]
+  client_id: keys.client_id,
+  client_secret: keys.client_secret
 });
 var randomWords = require('random-words');
 var mongoose = require('mongoose');
 var TranslateSchema = mongoose.model('TranslateSchema');
 
-
 router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-
+//translate word post requet
 router.post('/translate', function(req, res, next){
   var fromLanguage = req.body.fromLanguage;
   var toLanguage = req.body.toLanguage;
@@ -22,10 +21,10 @@ router.post('/translate', function(req, res, next){
 
   bt.translate(translateWord, fromLanguage, toLanguage, function(err, response){
     res.send(response);
-
   });
 });
 
+//start quiz post request
 router.post('/quiz', function(req, res){
   var random = randomWords(20);
   var counter = 0;
@@ -40,6 +39,7 @@ router.post('/quiz', function(req, res){
         nativeWord: response.original_text.toLowerCase(),
         foreignWord: response.translated_text.toLowerCase()
       });
+
       if (counter===19) {
         var query = {"user": "User"};
         var options = {upsert: true, new: true};
@@ -54,7 +54,7 @@ router.post('/quiz', function(req, res){
     });
   }
 });
-
+//answer and stats post request
 router.post('/answer', function(req, res){
   var currentWord = req.body.word;
   var correct = JSON.parse(req.body.correct);
@@ -71,6 +71,8 @@ router.post('/answer', function(req, res){
         }
       }
     }
+
+    //persist stats
     if (!found){
       if (correct){
         entry.stats.push(  {
@@ -88,6 +90,7 @@ router.post('/answer', function(req, res){
         });
       }
     }
+
     TranslateSchema.update({user: "User"}, entry, {upsert: true, new: true}, function(err){
       if (err){
         throw err;
@@ -97,6 +100,7 @@ router.post('/answer', function(req, res){
   res.end();
 });
 
+//find users current challenge
 router.get('/list', function(req, res){
   TranslateSchema.findOne({user: "User"}, function(err, entry){
     res.send(entry.currentChallenge);

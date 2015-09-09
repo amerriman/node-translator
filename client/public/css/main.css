@@ -1,10 +1,26 @@
+@font-face {
+  font-family: Bactosaurus;
+  src: url(bactosaurus.ttf);
+}
+
 body {
   background-color: 'slategray';
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+
+nav {
+  height:10%;
+}
+
 a {
   color: #00B7FF;
+}
+
+#dinosaur, img {
+  width: 88px;
+  height: 53px;
+  display: inline;
 }
 
 #results {
@@ -15,53 +31,57 @@ a {
 
 #heading {
   color: orange;
-  font-size: 40px;
+  font-size: 30px;
+  font-family: Bactosaurus;
 }
 
 #title {
   color: orange;
-
 }
+
+#fromLanguage, #toLanguage {
+  color: black;
+}
+
+#answer-form, #answer {
+  text-align:center;
+  margin: auto;
+}
+
+#quiz-results {
+  padding:0;
+  margin:0;
+}
+
 #right {
   margin-left: 800px;
+  margin-bottom: -140px;
 }
+
 .dropdown-toggle {
   float: right;
 }
 
-.animated {
-    -webkit-animation-duration: 3s;
-    animation-duration: 3s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
+.glyphicon-volume-off {
+  padding-left: 15px;
 }
 
-@-webkit-keyframes tada {
-    0% {-webkit-transform: scale(1);}
-    10%, 20% {-webkit-transform: scale(0.9) rotate(-3deg);}
-    30%, 50%, 70%, 90% {-webkit-transform: scale(1.1) rotate(3deg);}
-    40%, 60%, 80% {-webkit-transform: scale(1.1) rotate(-3deg);}
-    100% {-webkit-transform: scale(1) rotate(0);}
+.animated {
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
-@keyframes tada {
-    0% {transform: scale(1);}
-    10%, 20% {transform: scale(0.9) rotate(-3deg);}
-    30%, 50%, 70%, 90% {transform: scale(1.1) rotate(3deg);}
-    40%, 60%, 80% {transform: scale(1.1) rotate(-3deg);}
-    100% {transform: scale(1) rotate(0);}
-}
+
 .tada {
-    -webkit-animation-name: tada;
-    animation-name: tada;
+  -webkit-animation-name: tada;
+  animation-name: tada;
 }
 
 .stage {
   -webkit-perspective: 1000;
 }
 
-#fromLanguage, #toLanguage {
-  color: black;
-}
 .flashcard {
   background-color:white;
   height: 300px;
@@ -72,6 +92,10 @@ a {
   -webkit-transform-style: preserve-3d;
   transition: all 0.3s;
   -webkit-transition: all 0.3s;
+}
+
+.form-control  {
+  width: 40%;
 }
 
 .flipped, .back {
@@ -90,4 +114,20 @@ a {
 .front p, .back p {
   margin-top: 25%;
   font-size: 3em;
+}
+
+@-webkit-keyframes tada {
+  0% {-webkit-transform: scale(1);}
+  10%, 20% {-webkit-transform: scale(0.9) rotate(-3deg);}
+  30%, 50%, 70%, 90% {-webkit-transform: scale(1.1) rotate(3deg);}
+  40%, 60%, 80% {-webkit-transform: scale(1.1) rotate(-3deg);}
+  100% {-webkit-transform: scale(1) rotate(0);}
+}
+
+@keyframes tada {
+  0% {transform: scale(1);}
+  10%, 20% {transform: scale(0.9) rotate(-3deg);}
+  30%, 50%, 70%, 90% {transform: scale(1.1) rotate(3deg);}
+  40%, 60%, 80% {transform: scale(1.1) rotate(-3deg);}
+  100% {transform: scale(1) rotate(0);}
 }
