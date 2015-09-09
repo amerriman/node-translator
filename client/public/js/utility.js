@@ -46,14 +46,13 @@ function transText(sendData, cb){
 var result = function() {
   var numWrong = 0;
   var splitWord = currentWord.foreignWord.split('');
-  var splitAnswer = $('#answer').val().toLowerCase().split('');
-
+  var answer = $('#answer').val();
+  var splitAnswer = answer.toLowerCase().split('');
 
   if (splitAnswer.length === splitWord.length) {
   for (i=0; i<splitAnswer.length; i++) {
     if (splitAnswer[i] !== splitWord[i]) {
       numWrong++;
-      console.log(numWrong);
 }
 }
 } else if ($('#answer').val() === '') {
@@ -63,11 +62,14 @@ var result = function() {
     return false;
 
   } else {
+    console.log(levenshtein_distance(answer, currentWord.foreignWord));
+    if (levenshtein_distance(answer, currentWord.foreignWord) < 3) {
+      numWrong = 1;
+    } else {
     for (i=0; i<splitWord.length; i++) {
       if (splitWord[i] !== splitAnswer[i]){
         numWrong++;
-        console.log(numWrong);
-  }
+  }}
   }
   }
 
