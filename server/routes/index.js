@@ -58,7 +58,6 @@ router.post('/quiz', function(req, res){
 router.post('/answer', function(req, res){
   var currentWord = req.body.word;
   var correct = JSON.parse(req.body.correct);
-  console.log(correct);
   TranslateSchema.findOne({user: "User"}, function(err, entry){
     var found = false;
     for (var i = 0; i < entry.stats.length; i++) {
@@ -66,18 +65,14 @@ router.post('/answer', function(req, res){
         found = true;
         entry.stats[i].timesSeen++;
         if(correct){
-          console.log('FOUND AND CORRECT');
           entry.stats[i].timesCorrect++;
         } else {
-          console.log('FOUND AND INCORRECT');
           entry.stats[i].timesIncorrect++;
         }
       }
     }
     if (!found){
       if (correct){
-        console.log('correct', correct);
-        console.log('NOT FOUND AND CORRECT');
         entry.stats.push(  {
           word: currentWord,
           timesSeen: 1,
@@ -85,7 +80,6 @@ router.post('/answer', function(req, res){
           timesIncorrect: 0
         });
       } else {
-        console.log('NOT FOUND AND INCORRECT');
         entry.stats.push({
           word: currentWord,
           timesSeen: 1,
