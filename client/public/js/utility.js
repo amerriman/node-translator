@@ -1,5 +1,6 @@
 var currentList;
 var currentWord;
+var questionNum = 0;
 var ansWrong = 0;
 
 function nextWord(){
@@ -62,7 +63,6 @@ var result = function() {
     return false;
 
   } else {
-    console.log(levenshtein_distance(answer, currentWord.foreignWord));
     if (levenshtein_distance(answer, currentWord.foreignWord) < 3) {
       numWrong = 1;
     } else {
@@ -75,12 +75,12 @@ var result = function() {
 
   if (numWrong > 1) {
     ansWrong++;
-    console.log(ansWrong);
+    questionNum++;
     currentList.unshift(currentWord);
-    $('#quiz-results').html('<div class="alert alert-danger" role="alert">Incorrect!</div>');
+    $('#quiz-results').html('<div class="alert alert-danger" role="alert">Incorrect! <strong>'+(questionNum-ansWrong)+'</strong> out of <strong>'+questionNum+'</strong></div>');
     $('#back').css('color', 'red');
     if (ansWrong === 5) {
-      alert('you missed more than 5');
+      $('#quiz-results').html('<div class="alert alert-danger" role="alert">Missed more than 5! Starting Over...</div>');
       $.ajax({
         method: 'get',
         url: '/list'
@@ -92,22 +92,9 @@ var result = function() {
       return false;
 
   }else{
-    $('#quiz-results').html('<div class="alert alert-success" role="alert">Correct!</div>');
+    questionNum++;
+    $('#quiz-results').html('<div class="alert alert-success" role="alert">Correct! <strong>'+(questionNum-ansWrong)+'</strong> out of <strong>'+questionNum+'</strong></div>');
     $('#back').css('color', 'rgb(94, 198, 93)');
     return true;
   }
 };
-
-
-// $('.start-quiz').on('click', function() {
-//   $.ajax({
-//     method: 'post',
-//     url: '/quiz',
-//     data: {
-//       language: $('#toLanguage').val()
-//     }
-//   })
-//   .done(function(data){
-//     currentList = data;
-//   });
-// });

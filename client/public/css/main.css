@@ -13,6 +13,22 @@ a {
   text-align: center;
 }
 
+#heading {
+  color: orange;
+  font-size: 40px;
+}
+
+#title {
+  color: orange;
+
+}
+#right {
+  margin-left: 800px;
+}
+.dropdown-toggle {
+  float: right;
+}
+
 .animated {
     -webkit-animation-duration: 3s;
     animation-duration: 3s;
