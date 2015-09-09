@@ -2,9 +2,7 @@ $(document).on('ready', function() {
   $('.translator').hide();
   $('.flashcard').hide();
   $('#answer-form').hide();
-  $('.flashcard').on('click', function() {
-
-  });
+  $('#next-question').hide();
 });
 
 // add scripts
@@ -19,7 +17,9 @@ $('form').on('submit', function(e){
 
   transText(translateData, function(err, data){
     if(!err) {
+      responsiveVoice.speak(data, speechLanguage[$('#toLanguage').val()]);
       $('#results').text(data);
+      $('#results').addClass('animated tada');
     }
   });
 });
@@ -56,6 +56,8 @@ $('.translator').on('click', function() {
   $('#translate').show();
   $('.translator').hide();
   $('.start-quiz').show();
+  $('#quiz-results').hide();
+  $('#next-question').hide();
 });
 
 $('#quiz-answer').on('click', function() {

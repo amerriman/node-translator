@@ -24,6 +24,8 @@ function startQuiz() {
 
 function displayAnswer() {
   $('.flashcard').toggleClass('flipped');
+  responsiveVoice.speak(currentWord.foreignWord, speechLanguage[$('#toLanguage').val()]);
+
 }
 
 function transText(sendData, cb){
@@ -46,16 +48,37 @@ var result = function() {
   var splitWord = currentWord.foreignWord.split('');
   var splitAnswer = $('#answer').val().toLowerCase().split('');
 
+
+  if (splitAnswer.length === splitWord.length) {
   for (i=0; i<splitAnswer.length; i++) {
-    if (splitWord[i] !== splitAnswer[i])
+    if (splitAnswer[i] !== splitWord[i]) {
       numWrong++;
       console.log(numWrong);
+}
+}
+} else if ($('#answer').val() === '') {
+    $('#quiz-results').html('<div class="alert alert-warning" role="alert">You didn\'t enter anything!</div>');
+    $('#back').css('color', 'rgb(250, 149, 0)');
+
+    return false;
+
+  } else {
+    for (i=0; i<splitWord.length; i++) {
+      if (splitWord[i] !== splitAnswer[i]){
+        numWrong++;
+        console.log(numWrong);
   }
+  }
+  }
+
   if (numWrong > 1) {
     ansWrong++;
+    console.log(ansWrong);
     currentList.unshift(currentWord);
-    $('#quiz-results').text('Nice Try! But its WRONG!');
+    $('#quiz-results').html('<div class="alert alert-danger" role="alert">Incorrect!</div>');
+    $('#back').css('color', 'red');
     if (ansWrong === 5) {
+      alert('you missed more than 5');
       $.ajax({
         method: 'get',
         url: '/list'
@@ -67,7 +90,8 @@ var result = function() {
       return false;
 
   }else{
-    $('#quiz-results').text('Hey that is correct! You\'re a smart guy!');
+    $('#quiz-results').html('<div class="alert alert-success" role="alert">Correct!</div>');
+    $('#back').css('color', 'rgb(94, 198, 93)');
     return true;
   }
 };
