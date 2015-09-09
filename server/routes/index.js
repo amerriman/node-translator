@@ -2,8 +2,8 @@ var keys = require('./keys');
 var express = require('express');
 var router = express.Router();
 var bt = require('../../node_modules/bing-translate/lib/bing-translate.js').init({
-  client_id: keys.client_id,
-  client_secret: keys.client_secret
+  client_id: ENV[client_id],
+  client_secret: ENV[client_secret]
 });
 var randomWords = require('random-words');
 var mongoose = require('mongoose');
