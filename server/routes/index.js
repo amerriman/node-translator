@@ -1,18 +1,20 @@
 var keys = require('./keys');
 var express = require('express');
 var router = express.Router();
+// var bt = require('../../node_modules/bing-translate/lib/bing-translate.js').init({
+//   client_id: CLIENT_ID,
+//   client_secret: CLIENT_SECRET
+// });
 var bt = require('../../node_modules/bing-translate/lib/bing-translate.js').init({
-  client_id: CLIENT_ID,
-  client_secret: CLIENT_SECRET
+  client_id: keys.client_id || CLIENT_ID,
+  client_secret: keys.client_secret || CLIENT_SECRET,
 });
-// keys.client_id
-// keys.client_secret
 var randomWords = require('random-words');
 var mongoose = require('mongoose');
 var TranslateSchema = mongoose.model('TranslateSchema');
 
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('../views/index.html');
 });
 
 //translate word post requet
