@@ -2,9 +2,11 @@ var keys = require('./keys');
 var express = require('express');
 var router = express.Router();
 var bt = require('../../node_modules/bing-translate/lib/bing-translate.js').init({
-  client_id: CLIENT_ID || keys.client_id,
-  client_secret: CLIENT_SECRET || keys.client_secret
+  client_id: CLIENT_ID,
+  client_secret: CLIENT_SECRET
 });
+// keys.client_id
+// keys.client_secret
 var randomWords = require('random-words');
 var mongoose = require('mongoose');
 var TranslateSchema = mongoose.model('TranslateSchema');
