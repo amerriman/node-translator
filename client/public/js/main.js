@@ -32,6 +32,7 @@ $('form').on('submit', function(e){
 
 //quiz start click handler
 $('.start-quiz').on('click', function() {
+  $('#translateWord').val('');
   $('#translated-word').hide();
   $('.flashcard').show();
   $('#answer-form').show();
