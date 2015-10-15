@@ -17,4 +17,4 @@ var TranslateSchema = new Schema({
 });
 
 mongoose.model('TranslateSchema', TranslateSchema);
-mongoose.connect('mongodb://localhost/translator');
+mongoose.connect(MONGOLAB_URI || 'mongodb://localhost/translator');
