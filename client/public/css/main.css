@@ -103,7 +103,7 @@ a {
   -webkit-transform: rotateX(180deg);
 }
 
-.front {
+/*.front {
   height: 300px;
   width: 500px;
   position: absolute;
@@ -122,7 +122,16 @@ a {
    color: #000;
    top: -50%;
 
- }
+ }*/
+
+.front, .back {
+   height: 300px;
+   width: 500px;
+   position: absolute;
+   text-align: center;
+   -webkit-backface-visibility: hidden;
+}
+
 
 .front p, .back p {
   margin-top: 25%;
