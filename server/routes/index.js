@@ -1,10 +1,10 @@
-var keys = require('./keys2');
+// var keys = require('./keys');
 var express = require('express');
 var router = express.Router();
 var bt = require('../../node_modules/bing-translate/lib/bing-translate.js').init(
   {
-    client_id: keys.CLIENT_ID,
-    client_secret: keys.CLIENT_SECRET
+    client_id: process.env.CLIENT_ID,
+    client_secret: process.env.CLIENT_SECRET
   });
 // var bt = require('../../node_modules/bing-translate/lib/bing-translate.js').init(
 //   {
