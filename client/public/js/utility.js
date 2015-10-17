@@ -86,18 +86,19 @@ var result = function() {
     ansWrong++;
     questionNum++;
     currentList.unshift(currentWord);
-    $('#quiz-results').html('<div class="alert alert-danger" role="alert">Incorrect! <strong>'+(questionNum-ansWrong)+'</strong> out of <strong>'+questionNum+'</strong></div>');
+    $('#quiz-results').html('<div class="alert alert-danger" role="alert">Incorrect! <strong> Current score: '+ (questionNum-ansWrong)+'</strong> out of <strong>'+questionNum+'</strong></div>');
     $('#back').css('color', 'red');
 
     //if user inputs 5 wrong answers this restarts quiz
     if (ansWrong === 5) {
-      $('#quiz-results').html('<div class="alert alert-danger" role="alert">Missed more than 5! Starting Over...</div>');
+      $('#quiz-results').html('<div class="alert alert-danger" role="alert">You missed 5...starting quiz over!</div>');
       $.ajax({
         method: 'get',
         url: '/list'
       }).done(function(data){
         currentList = data;
         ansWrong = 0;
+        questionNum = 0;
       });
     }
     return false;
@@ -105,7 +106,7 @@ var result = function() {
     //otherwise mark correct and display success message
   } else {
     questionNum++;
-    $('#quiz-results').html('<div class="alert alert-success" role="alert">Correct! <strong>'+(questionNum-ansWrong)+'</strong> out of <strong>'+questionNum+'</strong></div>');
+    $('#quiz-results').html('<div class="alert alert-success" role="alert">Correct! <strong>Current score: '+(questionNum-ansWrong)+'</strong> out of <strong>'+questionNum+'</strong></div>');
     $('#back').css('color', 'rgb(94, 198, 93)');
     return true;
   }

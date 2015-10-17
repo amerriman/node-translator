@@ -1,25 +1,12 @@
 #Thesaurus Rex
 ##To Do
 
-1. Backend
-  1. data tracking
-    * What words have you had
-    * For each word how often are you right or wrong
-    * Number of quizzes taken
-    * frequency of success
-  1. Current list of words
-  1. User authentication
-  1. Comparing entry vs answer word
+**get rid of translated word on dom when user goes to the quiz.
 
-1. Front End
-  1. Add 20 word translate 'quiz'
-    * flash cards
-    * user inputs the answer
-    * display the correct answer if they were right
-    * repeats same 20 words if you get 5 wrong before finishing
-  1. make it look good
+**get rid of the card flip - just have it in space.
 
+**make the initial text in the box lighter - and make it say something else so it's not confusing to the user
 
+**quiz is not working properly - maybe get rid of it...at least temporarily?
 
-
-still needs to display to DOM
+**make the music stop

@@ -37,10 +37,12 @@ $('.start-quiz').on('click', function() {
   $('.flashcard').show();
   $('#answer-form').show();
   $('#results').hide();
+  $('#results').html('');
   $('#translate').hide();
   $('.translator').show();
   $('.start-quiz').hide();
   $('#next-question').hide();
+  $('.language-picker').hide();
   window.scrollTo(0,document.body.scrollHeight);
 
   //send language selection
@@ -69,20 +71,25 @@ $('.translator').on('click', function() {
   $('.start-quiz').show();
   $('#quiz-results').hide();
   $('#next-question').hide();
+  $('#front').val('');
+  $('#back').val('');
+  $('#answer').val('');
+  $('.language-picker').show();
 });
 
 //obligatory jurrasic park theme
-$('#dinosaur').on('click', function() {
-  $("<audio class='jpark'></audio>").attr({
-    'src':'css/jparktheme.mp3',
-    'volume':0.4,
-    'autoplay':'autoplay'
-  });
-});
-$('.glyphicon-volume-off').on('click', function() {
-  console.log('test');
-  $('.jpark').prop('volume', 0.0);
-});
+// $('#dinosaur').on('click', function() {
+//   $("<audio class='jpark'></audio>").attr({
+//     'src':'css/jparktheme.mp3',
+//     'volume':0.4,
+//     'autoplay':'autoplay'
+//   });
+// });
+// $('.glyphicon-volume-off').on('click', function() {
+//   console.log('test');
+//   $('.jpark').prop('volume', 0.0);
+// });
+
 
 //quiz answer post request
 $('#quiz-answer').on('click', function() {
