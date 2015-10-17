@@ -7,7 +7,7 @@ $(document).on('ready', function() {
 });
 
 //translate form submit handler
-$('form').on('submit', function(e){
+$('#translate-form').on('submit', function(e){
   e.preventDefault();
 
   //user selections
@@ -92,7 +92,9 @@ $('.translator').on('click', function() {
 
 
 //quiz answer post request
-$('#quiz-answer').on('click', function() {
+$('#answer-form').on('submit', function(event) {
+  event.preventDefault();
+
   var res = result();
   $.ajax({
     method: 'post',
@@ -106,10 +108,14 @@ $('#quiz-answer').on('click', function() {
   });
   $('#quiz-answer').hide();
   $('#next-question').show();
+  $('#quiz-answer').prop("disabled", true);
 });
 
+
 //next question click handler
-$('#next-question').on('click', function() {
+$('#next-question').on('click', function(event) {
+  event.preventDefault();
   nextWord();
   $('#answer').val('');
+  $('#quiz-answer').prop("disabled", false);
 });
